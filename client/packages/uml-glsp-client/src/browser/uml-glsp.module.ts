@@ -42,6 +42,7 @@ import {
 import { umlBoundsModule } from './features/bounds/uml-bounds.module.js';
 import { umlCopyPasteModule } from './features/copy-paste/uml-copy-paste.module.js';
 import { UMLContainerManager } from './features/creation/uml-container-manager.js';
+import { umlDiffVisualizationModule } from './features/diff-visualization/uml-diff-visualiziation.module.js';
 import { umlEditModule } from './features/edit/uml-edit.module.js';
 import { umlTypeHintsModule } from './features/hints/uml-type-hints.module.js';
 import { umlLoadingModule } from './features/loading/uml-loading.module.js';
@@ -86,6 +87,7 @@ export function initializeUMLDiagramContainer(container: Container, ...container
         umlThemeModule,
         umlToolManagerModule,
         umlTypeHintsModule,
+        umlDiffVisualizationModule,
         { add: umlToolPaletteModule, remove: toolPaletteModule },
         ...umlDiagramModules,
         ...containerConfiguration
