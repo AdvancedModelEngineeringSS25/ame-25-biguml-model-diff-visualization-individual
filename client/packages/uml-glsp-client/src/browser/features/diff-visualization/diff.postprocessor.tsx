@@ -1,5 +1,5 @@
 /*********************************************************************************
- * Copyright (c) 2023 borkdominik and others.
+ * Copyright (c) 2025 borkdominik and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the MIT License which is available at https://opensource.org/licenses/MIT.
@@ -11,6 +11,7 @@ import { isBoundsAware, isSelectable, setClass, type GModelElement, type IVNodeP
 import { injectable } from 'inversify';
 import { type VNode } from 'snabbdom';
 
+// TODO possibly remove if completely resolved in handler
 @injectable()
 export class DiffVisualization implements IVNodePostprocessor {
     decorate(vnode: VNode, element: GModelElement): VNode {
