@@ -1,0 +1,23 @@
+.diff-visualization-create {
+    filter: drop-shadow(0px 0px 20px rgb(0, 255, 0));
+}
+
+.diff-visualization-create .uml-text-interactable,
+.diff-visualization-create .uml-text-highlight {
+    fill: rgb(0, 180, 0);
+    filter: none;
+}
+
+.diff-visualization-edit {
+    filter: drop-shadow(0px 0px 20px rgb(0, 0, 255));
+}
+
+.diff-visualization-edit.uml-text-interactable,
+.diff-visualization-edit.uml-text-highlight {
+    fill: rgb(77, 77, 255);
+    filter: none;
+}
+
+.diff-visualization-delete {
+    filter: drop-shadow(0px 0px 20px rgb(255, 0, 0));
+}

@@ -7,7 +7,3 @@
 .selection-border.hover {
     stroke-width: 0.75;
 }
-
-.diff-visualization {
-    filter: drop-shadow(0px 0px 20px rgb(0, 255, 0));
-}

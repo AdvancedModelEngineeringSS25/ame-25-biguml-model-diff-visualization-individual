@@ -10,13 +10,10 @@
 import { configureActionHandler, FeatureModule, SetModelAction, TYPES, UpdateModelAction } from '@eclipse-glsp/client';
 import { DiffInitialLoadCompleteAction } from './diff.action.js';
 import { DiffHandler } from './diff.handler.js';
-import { DiffVisualization } from './diff.postprocessor.js';
 import { DiffStartup } from './diff.startup.js';
 
 export const umlDiffVisualizationModule = new FeatureModule((bind, _unbind, isBound, rebind) => {
     const context = { bind, _unbind, isBound, rebind };
-
-    bind(TYPES.IVNodePostprocessor).to(DiffVisualization);
 
     bind(TYPES.IDiagramStartup).to(DiffStartup);
 
