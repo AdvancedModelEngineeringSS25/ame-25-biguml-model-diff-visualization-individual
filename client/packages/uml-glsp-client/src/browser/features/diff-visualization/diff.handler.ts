@@ -12,6 +12,7 @@ import {
     type IActionDispatcher,
     type IActionHandler,
     type ICommand,
+    ModifyCSSFeedbackAction,
     SetModelAction,
     TYPES,
     UpdateModelAction
@@ -19,6 +20,10 @@ import {
 import { inject, injectable } from 'inversify';
 import { DiffInitialLoadCompleteAction } from './diff.action.js';
 
+/**
+ * This handler is responsible for detecting changes in the model compared to the last committed version
+ * and subsequently display a visualization of those changes.
+ */
 @injectable()
 export class DiffHandler implements IActionHandler {
     @inject(TYPES.IActionDispatcher)
@@ -32,25 +37,25 @@ export class DiffHandler implements IActionHandler {
             this.initialModel = action.model;
         }
 
-        const flaggedAction = action as { _fromDiffHandler?: boolean };
-        if (SetModelAction.is(action) || (UpdateModelAction.is(action) && !flaggedAction._fromDiffHandler)) {
+        if (SetModelAction.is(action) || UpdateModelAction.is(action)) {
             this.currentModel = action.newRoot;
             console.log(action);
         }
 
         // If necessary for performance reasons, this could only be execute on save, i.e. SaveModelAction.is(action)
-        if (this.initialModel && this.currentModel && !flaggedAction._fromDiffHandler) {
+        if (this.initialModel && this.currentModel) {
             // TODO do a proper comparison of models for visualization purposes
             console.log('Initial Model', this.initialModel);
             console.log('Current Model', this.currentModel);
             this.currentModel.children?.forEach(child => {
-                console.log(child.cssClasses);
+                console.log(child);
                 child.cssClasses?.push('diff-visualization');
             });
 
-            // The dispatch is necessary to rerender the webview to make the visualization visible
-            const flaggedOptions = { animate: false, _fromDiffHandler: true };
-            this.actionDispatcher.dispatch(UpdateModelAction.create(this.currentModel, flaggedOptions));
+            // This dispatch triggers a rerender of the webview
+            // Theoretically this should be called with `elements` and `add`, but this leads to a delay in rendering
+            // By simply adding the classes directly to the model and using the action for a rerender, this issue is circumvented
+            this.actionDispatcher.dispatch(ModifyCSSFeedbackAction.create({}));
         }
     }
 }
