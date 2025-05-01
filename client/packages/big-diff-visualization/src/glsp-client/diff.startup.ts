@@ -8,10 +8,7 @@
  **********************************************************************************/
 import { type GLSPModelSource, type IActionDispatcher, type IDiagramStartup, TYPES } from '@eclipse-glsp/client';
 import { inject, injectable } from 'inversify';
-import {
-    type GenerateLastCommitModelFileActionResponse,
-    RequestGenerateLastCommitModelFileAction
-} from '../../../common/actions/diff.action.js';
+import { type GenerateLastCommitModelFileActionResponse, RequestGenerateLastCommitModelFileAction } from '../common/diff.action.js';
 
 /**
  * This class requests the last committed version of the model as a temporary file so it can later on be read as

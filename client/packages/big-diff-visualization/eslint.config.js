@@ -7,7 +7,7 @@
  * SPDX-License-Identifier: MIT
  **********************************************************************************/
 
-export * from './editor.module.js';
-export * from './editor.provider.js';
-export * from './features/theme/index.js';
-export * from './features/webview/index.js';
+import rootConfig from '../../eslint.config.js';
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [...rootConfig];

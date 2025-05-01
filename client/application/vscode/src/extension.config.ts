@@ -6,13 +6,14 @@
  *
  * SPDX-License-Identifier: MIT
  *********************************************************************************/
+import { diffModule } from '@borkdominik-biguml/big-diff-visualization/vscode';
 import { helloWorldModule } from '@borkdominik-biguml/big-hello-world/vscode';
 import { minimapModule } from '@borkdominik-biguml/big-minimap/vscode';
 import { outlineModule } from '@borkdominik-biguml/big-outline/vscode';
 import { propertyPaletteModule } from '@borkdominik-biguml/big-property-palette/vscode';
 import { createVSCodeCommonContainer, TYPES, type GLSPDiagramSettings } from '@borkdominik-biguml/big-vscode-integration/vscode';
 import { loadVSCodeNodeContainer, type GLSPServerConfig } from '@borkdominik-biguml/big-vscode-integration/vscode-node';
-import { diffModule, editorModule, themeModule } from '@borkdominik-biguml/uml-glsp-client/vscode';
+import { editorModule, themeModule } from '@borkdominik-biguml/uml-glsp-client/vscode';
 import { type Container } from 'inversify';
 import type * as vscode from 'vscode';
 import { VSCodeSettings } from './language.js';

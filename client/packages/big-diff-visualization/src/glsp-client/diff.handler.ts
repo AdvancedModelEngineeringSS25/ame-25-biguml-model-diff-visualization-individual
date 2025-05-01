@@ -19,7 +19,7 @@ import {
     UpdateModelAction
 } from '@eclipse-glsp/client';
 import { inject, injectable } from 'inversify';
-import { DiffInitialLoadCompleteAction } from '../../../common/actions/diff.action.js';
+import { DiffInitialLoadCompleteAction } from '../common/diff.action.js';
 
 /**
  * This handler is responsible for detecting changes in the model compared to the last committed version

@@ -21,7 +21,7 @@ import {
     DiffInitialLoadCompleteAction,
     GenerateLastCommitModelFileActionResponse,
     RequestDeleteLastCommitModelFileAction
-} from '../../../common/actions/diff.action.js';
+} from '../common/diff.action.js';
 
 /**
  * This class handles the communication with the vscode client after the temporary file has been requested.

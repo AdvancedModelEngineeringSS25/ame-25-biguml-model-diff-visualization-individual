@@ -8,15 +8,15 @@
  **********************************************************************************/
 
 import { TYPES, type ActionDispatcher, type ActionListener, type Disposable } from '@borkdominik-biguml/big-vscode-integration/vscode';
+import { DisposableCollection } from '@eclipse-glsp/protocol';
+import { inject, injectable, postConstruct } from 'inversify';
+import * as vscode from 'vscode';
 import {
     DeleteLastCommitModelFileActionResponse,
     GenerateLastCommitModelFileActionResponse,
     RequestDeleteLastCommitModelFileAction,
     RequestGenerateLastCommitModelFileAction
-} from '@borkdominik-biguml/uml-glsp-client';
-import { DisposableCollection } from '@eclipse-glsp/protocol';
-import { inject, injectable, postConstruct } from 'inversify';
-import * as vscode from 'vscode';
+} from '../common/diff.action.js';
 
 /**
  * This handler explicitly serves to handle events that require the vscode API and cannot be handled by the GLSP server/client.

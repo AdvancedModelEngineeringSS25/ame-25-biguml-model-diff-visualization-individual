@@ -7,6 +7,8 @@
  * SPDX-License-Identifier: MIT
  *********************************************************************************/
 
+import '../../styles/index.css';
+
 import { configureActionHandler, FeatureModule, SetModelAction, TYPES, UpdateModelAction } from '@eclipse-glsp/client';
 import { ExtensionActionKind } from '@eclipse-glsp/vscode-integration-webview';
 import {
@@ -15,7 +17,7 @@ import {
     GenerateLastCommitModelFileActionResponse,
     RequestDeleteLastCommitModelFileAction,
     RequestGenerateLastCommitModelFileAction
-} from '../../../common/actions/diff.action.js';
+} from '../common/diff.action.js';
 import { DiffStartupHandler } from './diff-startup.handler.js';
 import { DiffHandler } from './diff.handler.js';
 import { DiffStartup } from './diff.startup.js';
