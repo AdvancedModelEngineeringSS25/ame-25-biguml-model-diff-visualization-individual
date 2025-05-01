@@ -6,20 +6,16 @@
  *
  * SPDX-License-Identifier: MIT
  **********************************************************************************/
-import {
-    type GLSPModelSource,
-    type IActionDispatcher,
-    type IDiagramStartup,
-    RequestModelAction,
-    type SetModelAction,
-    TYPES
-} from '@eclipse-glsp/client';
+import { type GLSPModelSource, type IActionDispatcher, type IDiagramStartup, TYPES } from '@eclipse-glsp/client';
 import { inject, injectable } from 'inversify';
-import { DiffInitialLoadCompleteAction } from './diff.action.js';
+import {
+    type GenerateLastCommitModelFileActionResponse,
+    RequestGenerateLastCommitModelFileAction
+} from '../../../common/actions/diff.action.js';
 
 /**
- * This class requests the last committed version of the model as another GModel parallel to the current working version
- * in order to compare them and provide visual highlighting of the changes.
+ * This class requests the last committed version of the model as a temporary file so it can later on be read as
+ * another GModel parallel to the current working version in order to compare them and provide visual highlighting of the changes.
  */
 @injectable()
 export class DiffStartup implements IDiagramStartup {
@@ -30,19 +26,10 @@ export class DiffStartup implements IDiagramStartup {
     protected modelSource: GLSPModelSource;
 
     public async postRequestModel(): Promise<void> {
-        // TODO create a temporary model file of the last committed version
-        // TODO handle the case that no previous version exists, i.e. this is the first version
-        const isFirstVersion = false;
-        if (isFirstVersion) {
-            return await this.actionDispatcher.dispatch(DiffInitialLoadCompleteAction.create());
-        }
-        // Request a GModel of the last committed version of the model
-        const result = await this.actionDispatcher.request<SetModelAction>(
-            RequestModelAction.create({
-                options: { sourceUri: this.modelSource.sourceUri ?? '', diagramType: this.modelSource.diagramType }
-            })
+        // Request the last committed model file version as a temporary file from the vscode client
+        this.actionDispatcher.request<GenerateLastCommitModelFileActionResponse>(
+            // The sourceUri starts with 'file://' which needs to be ignored
+            RequestGenerateLastCommitModelFileAction.create({ path: this.modelSource.sourceUri?.replace('file://', '') ?? '' })
         );
-        // Inform the handler that the load of the last committed model was successful and that comparisons can now be done
-        await this.actionDispatcher.dispatch(DiffInitialLoadCompleteAction.create({ model: result.newRoot }));
     }
 }

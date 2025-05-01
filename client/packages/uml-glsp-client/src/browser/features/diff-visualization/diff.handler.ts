@@ -19,7 +19,7 @@ import {
     UpdateModelAction
 } from '@eclipse-glsp/client';
 import { inject, injectable } from 'inversify';
-import { DiffInitialLoadCompleteAction } from './diff.action.js';
+import { DiffInitialLoadCompleteAction } from '../../../common/actions/diff.action.js';
 
 /**
  * This handler is responsible for detecting changes in the model compared to the last committed version
@@ -30,23 +30,24 @@ export class DiffHandler implements IActionHandler {
     @inject(TYPES.IActionDispatcher)
     protected actionDispatcher: IActionDispatcher;
 
+    /** Depending on whether git is available, comparisions make no sense */
+    private ignoreCompare: boolean = false;
     private initialModel: GModelRootSchema;
     private currentModel: GModelRootSchema;
 
     handle(action: Action): void | Action | ICommand {
         if (DiffInitialLoadCompleteAction.is(action)) {
             this.initialModel = action.model;
+            this.ignoreCompare = action.noGit;
         }
 
         if (SetModelAction.is(action) || UpdateModelAction.is(action)) {
             this.currentModel = action.newRoot;
-            console.log(action);
         }
 
         // If necessary for performance reasons, this could only be execute on save, i.e. SaveModelAction.is(action)
-        if (this.initialModel && this.currentModel) {
-            console.log('Initial Model', this.initialModel);
-            console.log('Current Model', this.currentModel);
+        // If git is not available, then no comparisisons should occur
+        if (this.initialModel && this.currentModel && !this.ignoreCompare) {
             this.compareModels();
 
             // This dispatch triggers a rerender of the webview

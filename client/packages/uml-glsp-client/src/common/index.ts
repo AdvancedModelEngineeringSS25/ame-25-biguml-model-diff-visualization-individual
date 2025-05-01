@@ -8,6 +8,6 @@
  *********************************************************************************/
 
 export * from './actions/autocomplete.action.js';
+export * from './actions/diff.action.js';
 export * from './actions/editor.actions.js';
 export * from './features/theme/theme.actions.js';
-

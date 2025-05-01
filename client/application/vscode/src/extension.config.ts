@@ -12,7 +12,7 @@ import { outlineModule } from '@borkdominik-biguml/big-outline/vscode';
 import { propertyPaletteModule } from '@borkdominik-biguml/big-property-palette/vscode';
 import { createVSCodeCommonContainer, TYPES, type GLSPDiagramSettings } from '@borkdominik-biguml/big-vscode-integration/vscode';
 import { loadVSCodeNodeContainer, type GLSPServerConfig } from '@borkdominik-biguml/big-vscode-integration/vscode-node';
-import { editorModule, themeModule } from '@borkdominik-biguml/uml-glsp-client/vscode';
+import { diffModule, editorModule, themeModule } from '@borkdominik-biguml/uml-glsp-client/vscode';
 import { type Container } from 'inversify';
 import type * as vscode from 'vscode';
 import { VSCodeSettings } from './language.js';
@@ -42,7 +42,8 @@ export function createContainer(
         propertyPaletteModule(VSCodeSettings.propertyPalette.viewId),
         minimapModule(VSCodeSettings.minimap.viewId),
         helloWorldModule(VSCodeSettings.helloWorld.viewId),
-        themeModule
+        themeModule,
+        diffModule
     );
 
     return container;

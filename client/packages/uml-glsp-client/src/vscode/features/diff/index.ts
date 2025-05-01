@@ -7,8 +7,5 @@
  * SPDX-License-Identifier: MIT
  **********************************************************************************/
 
-export * from './editor.module.js';
-export * from './editor.provider.js';
-export * from './features/diff/index.js';
-export * from './features/theme/index.js';
-export * from './features/webview/index.js';
+export * from './diff.handler.js';
+export * from './diff.module.js';

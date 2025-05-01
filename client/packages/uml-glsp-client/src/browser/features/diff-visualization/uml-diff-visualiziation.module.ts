@@ -8,7 +8,15 @@
  *********************************************************************************/
 
 import { configureActionHandler, FeatureModule, SetModelAction, TYPES, UpdateModelAction } from '@eclipse-glsp/client';
-import { DiffInitialLoadCompleteAction } from './diff.action.js';
+import { ExtensionActionKind } from '@eclipse-glsp/vscode-integration-webview';
+import {
+    DeleteLastCommitModelFileActionResponse,
+    DiffInitialLoadCompleteAction,
+    GenerateLastCommitModelFileActionResponse,
+    RequestDeleteLastCommitModelFileAction,
+    RequestGenerateLastCommitModelFileAction
+} from '../../../common/actions/diff.action.js';
+import { DiffStartupHandler } from './diff-startup.handler.js';
 import { DiffHandler } from './diff.handler.js';
 import { DiffStartup } from './diff.startup.js';
 
@@ -23,4 +31,13 @@ export const umlDiffVisualizationModule = new FeatureModule((bind, _unbind, isBo
     configureActionHandler(context, DiffInitialLoadCompleteAction.KIND, DiffHandler);
     // If necessary for performance reasons, only execute the comparison on save
     // configureActionHandler(context, SaveModelAction.KIND, DiffHandler);
+
+    configureActionHandler(context, GenerateLastCommitModelFileActionResponse.KIND, DiffStartupHandler);
+    configureActionHandler(context, DeleteLastCommitModelFileActionResponse.KIND, DiffStartupHandler);
+
+    // Forward the given actions between GLSP client and vscode client
+    bind(ExtensionActionKind).toConstantValue(RequestGenerateLastCommitModelFileAction.KIND);
+    bind(ExtensionActionKind).toConstantValue(GenerateLastCommitModelFileActionResponse.KIND);
+    bind(ExtensionActionKind).toConstantValue(RequestDeleteLastCommitModelFileAction.KIND);
+    bind(ExtensionActionKind).toConstantValue(DeleteLastCommitModelFileActionResponse.KIND);
 });
