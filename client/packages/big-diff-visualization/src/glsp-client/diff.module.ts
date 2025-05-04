@@ -22,7 +22,7 @@ import { DiffStartupHandler } from './diff-startup.handler.js';
 import { DiffHandler } from './diff.handler.js';
 import { DiffStartup } from './diff.startup.js';
 
-export const umlDiffVisualizationModule = new FeatureModule((bind, _unbind, isBound, rebind) => {
+export const diffModule = new FeatureModule((bind, _unbind, isBound, rebind) => {
     const context = { bind, _unbind, isBound, rebind };
 
     bind(TYPES.IDiagramStartup).to(DiffStartup);
