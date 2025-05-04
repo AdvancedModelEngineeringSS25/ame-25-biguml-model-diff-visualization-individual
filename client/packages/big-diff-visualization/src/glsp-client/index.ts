@@ -7,4 +7,4 @@
  * SPDX-License-Identifier: MIT
  **********************************************************************************/
 
-export * from './uml-diff-visualiziation.module.js';
+export * from './diff.module.js';

@@ -93,6 +93,11 @@
         "category": "bigUML",
         "enablement": "activeCustomEditorId == 'bigUML.diagramView'",
         "icon": "$(symbol-reference)"
+      },
+      {
+        "command": "bigUML.toggle.diff",
+        "title": "Toggle Git-based Diff Visualization",
+        "category": "bigUML"
       }
     ],
     "configuration": {
@@ -103,6 +108,12 @@
           "default": true,
           "scope": "resource",
           "description": "Hide the *.unotation files."
+        },
+        "bigUML.showDiff": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "description": "Displays Git-based Diff Visualization in the diagrams."
         }
       }
     },

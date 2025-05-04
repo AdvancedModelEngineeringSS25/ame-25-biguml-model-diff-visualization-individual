@@ -9,6 +9,8 @@
 
 import { TYPES } from '@borkdominik-biguml/big-vscode-integration/vscode';
 import { FeatureModule } from '@eclipse-glsp/client';
+import { ToggleDiffCommand } from './diff-setting.command.js';
+import { DiffSettingActionHandler } from './diff-setting.handler.js';
 import { DiffActionHandler } from './diff.handler.js';
 
 export const diffModule = new FeatureModule(bind => {
@@ -17,4 +19,11 @@ export const diffModule = new FeatureModule(bind => {
     bind(DiffActionHandler).toSelf().inSingletonScope();
     bind(TYPES.Disposable).toService(DiffActionHandler);
     bind(TYPES.RootInitialization).toService(DiffActionHandler);
+
+    bind(DiffSettingActionHandler).toSelf().inSingletonScope();
+    bind(TYPES.Disposable).toService(DiffSettingActionHandler);
+    bind(TYPES.RootInitialization).toService(DiffSettingActionHandler);
+
+    bind(ToggleDiffCommand).toSelf().inSingletonScope();
+    bind(TYPES.Command).to(ToggleDiffCommand);
 });

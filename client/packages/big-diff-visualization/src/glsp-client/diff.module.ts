@@ -11,6 +11,7 @@ import '../../styles/index.css';
 
 import { configureActionHandler, FeatureModule, SetModelAction, TYPES, UpdateModelAction } from '@eclipse-glsp/client';
 import { ExtensionActionKind } from '@eclipse-glsp/vscode-integration-webview';
+import { SetDiffPreferencesAction } from '../common/diff-setting.action.js';
 import {
     DeleteLastCommitModelFileActionResponse,
     DiffInitialLoadCompleteAction,
@@ -31,6 +32,7 @@ export const diffModule = new FeatureModule((bind, _unbind, isBound, rebind) => 
     configureActionHandler(context, SetModelAction.KIND, DiffHandler);
     configureActionHandler(context, UpdateModelAction.KIND, DiffHandler);
     configureActionHandler(context, DiffInitialLoadCompleteAction.KIND, DiffHandler);
+    configureActionHandler(context, SetDiffPreferencesAction.KIND, DiffHandler);
     // If necessary for performance reasons, only execute the comparison on save
     // configureActionHandler(context, SaveModelAction.KIND, DiffHandler);
 
@@ -42,4 +44,5 @@ export const diffModule = new FeatureModule((bind, _unbind, isBound, rebind) => 
     bind(ExtensionActionKind).toConstantValue(GenerateLastCommitModelFileActionResponse.KIND);
     bind(ExtensionActionKind).toConstantValue(RequestDeleteLastCommitModelFileAction.KIND);
     bind(ExtensionActionKind).toConstantValue(DeleteLastCommitModelFileActionResponse.KIND);
+    bind(ExtensionActionKind).toConstantValue(SetDiffPreferencesAction.KIND);
 });

@@ -7,5 +7,6 @@
  * SPDX-License-Identifier: MIT
  **********************************************************************************/
 
+export * from './diff-setting.handler.js';
 export * from './diff.handler.js';
 export * from './diff.module.js';
