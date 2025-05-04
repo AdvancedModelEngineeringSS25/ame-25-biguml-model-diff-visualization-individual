@@ -9,3 +9,4 @@
 
 export * from './diff-setting.action.js';
 export * from './diff.action.js';
+export * from './diff.util.js';
